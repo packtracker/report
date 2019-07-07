@@ -1,8 +1,12 @@
-## GitHub Action to report webpack stats to [packtracker.io](https://packtracker.io/?utm_source=github&utm_medium=action&utm_campaign=links)
+## Docker containers to report webpack stats to [packtracker.io](https://packtracker.io/?utm_source=github&utm_medium=action&utm_campaign=links)
 
 This GitHub action will upload your webpack build stats to the packtracker.io service.
 
-### Configuration
+### Usage as a CircleCI Orb
+
+TBD
+
+### Usage as a Github Action
 
 #### Secrets (Required)
 
@@ -24,7 +28,7 @@ workflow "packtracker.io" {
 }
 
 action "Report to packtracker.io" {
-  uses = "packtracker/github-action@2.1.0"
+  uses = "packtracker/report@2.1.0"
   secrets = ["PT_PROJECT_TOKEN"]
   env = {
     "WEBPACK_CONFIG_PATH" = "./config/webpack/production.js"
