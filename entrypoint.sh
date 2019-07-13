@@ -29,6 +29,7 @@ else
   exit 2
 fi
 
+node --version
 cp /report.js ./report.js
 node ./report.js
 rm ./report.js
