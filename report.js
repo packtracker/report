@@ -4,7 +4,7 @@ const webpack = require('webpack')
 const PacktrackerPlugin = require('@packtracker/webpack-plugin')
 
 let config = {}
-if (fs.lstatSync(process.env.WEBPACK_CONFIG_PATH).isFile()) {
+if (process.env.WEBPACK_CONFIG_PATH && fs.lstatSync(process.env.WEBPACK_CONFIG_PATH).isFile()) {
   config = require(process.env.WEBPACK_CONFIG_PATH)
 }
 
