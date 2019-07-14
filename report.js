@@ -34,7 +34,6 @@ webpack(config, (err) => {
 
 function githubConfig () {
   const event = require(process.env.GITHUB_EVENT_PATH)
-  console.log(util.inspect(event))
   return {
     upload: true,
     fail_build: true,
