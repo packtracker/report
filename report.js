@@ -5,21 +5,31 @@ const PacktrackerPlugin = require('@packtracker/webpack-plugin')
 
 let config = {}
 if (fs.existsSync(process.env.WEBPACK_CONFIG_PATH)) {
+  console.log(`packtracker: webpack config file loaded (${process.env.WEBPACK_CONFIG_PATH})`)
   config = require(process.env.WEBPACK_CONFIG_PATH)
+} else {
+  console.log(`packtracker: webpack config file not found loaded from ${process.env.WEBPACK_CONFIG_PATH}`)
 }
+
 
 config.plugins = config.plugins || []
 
 if (process.env.GITHUB_EVENT_PATH) {
+  console.log(`packtracker: loading github config`)
   config.plugins.push(new PacktrackerPlugin(githubConfig()))
 } else if (process.env.CIRCLECI) {
+  console.log(`packtracker: loading circle config`)
   config.plugins.push(new PacktrackerPlugin(circleConfig()))
 }
 
 webpack(config, (err) => {
   if (err) {
+    console.log(`packtracker: webpack build failed`)
+    console.log(`packtracker: ${err.message}`)
     process.exit(1)
   } else {
+    console.log(`packtracker: webpack build succeeded`)
+    process.exit(1)
     process.exit(0)
   }
 })
