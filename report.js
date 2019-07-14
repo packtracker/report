@@ -8,7 +8,7 @@ if (fs.existsSync(process.env.WEBPACK_CONFIG_PATH)) {
   console.log(`packtracker: webpack config file loaded (${process.env.WEBPACK_CONFIG_PATH})`)
   config = require(process.env.WEBPACK_CONFIG_PATH)
 } else {
-  console.log(`packtracker: webpack config file not found loaded from ${process.env.WEBPACK_CONFIG_PATH}`)
+  console.log(`packtracker: webpack config file not found`)
 }
 
 
