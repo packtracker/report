@@ -25,11 +25,9 @@ if (process.env.GITHUB_EVENT_PATH) {
 webpack(config, (err) => {
   if (err) {
     console.log(`packtracker: webpack build failed`)
-    console.log(`packtracker: ${err.message}`)
     process.exit(1)
   } else {
     console.log(`packtracker: webpack build succeeded`)
-    process.exit(1)
     process.exit(0)
   }
 })
