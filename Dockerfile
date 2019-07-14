@@ -1,4 +1,4 @@
-FROM packtracker/report:dev.5
+FROM packtracker/report:dev.6
 
 LABEL "com.github.actions.name"="Report to packtracker.io"
 LABEL "com.github.actions.description"="Report your webpack build stats to the packtracker.io service."
