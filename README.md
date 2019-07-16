@@ -18,11 +18,6 @@ version: 2.1
 
 orbs:
   packtracker: packtracker/report@x.y.z
-
-workflows:
-  packtracker:
-    jobs:
-      - packtracker/report
 ```
 
 #### Authentication

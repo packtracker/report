@@ -4,7 +4,7 @@ description: An orb for the packtracker.io webpack bundle analyzer service.
 executors:
   reporter:
     docker:
-      - image: packtracker/report:dev.11
+      - image: packtracker/report:2.1.2
 jobs:
   report:
     description: |
