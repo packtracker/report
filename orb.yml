@@ -1,0 +1,69 @@
+version: 2.1
+description: An orb for the packtracker.io webpack bundle analyzer service.
+
+executors:
+  reporter:
+    docker:
+      - image: packtracker/report:2.1.2
+jobs:
+  report:
+    description: |
+      This job reports your webpack bundle stats to the packtracker.io service.
+
+      For this job to be able to authenticate with the packtracker service, you must additionally
+      add the `PT_PROJECT_TOKEN` environment variable to your CircleCI project configuration.
+      The project token can be found in the packtracker project settings.
+    parameters:
+      project_root:
+        description: The path to the directory containing your package.json
+        type: string
+        default: ""
+      webpack_config:
+        description: The path to your webpack configuration file (if present)
+        type: string
+        default: "webpack.config.js"
+    environment:
+      PT_PROJECT_ROOT: << parameters.project_root >>
+      WEBPACK_CONFIG_PATH: << parameters.webpack_config >>
+    executor: reporter
+    steps:
+      - checkout
+      - run:
+          name: "Reporting to packtracker.io"
+          command: |
+            cp /entrypoint.sh .
+            ./entrypoint.sh
+examples:
+  simple:
+    description: Simplest use case, leveraging default webpack config location and root project path.
+    usage:
+      version: 2.1
+      orbs:
+        packtracker: packtracker/report@x.y.z
+      workflows:
+        packtracker:
+          jobs:
+            - packtracker/report
+  custom_webpack_config_path:
+    description: Custom webpack config location (for example Ruby on Rails).
+    usage:
+      version: 2.1
+      orbs:
+        packtracker: packtracker/report@x.y.z
+      workflows:
+        packtracker:
+          jobs:
+            - packtracker/report:
+                webpack_config: "./config/webpack/production.js"
+
+  custom_nested_config_path:
+    description: Custom project path, useful for monorepo situations.
+    usage:
+      version: 2.1
+      orbs:
+        packtracker: packtracker/report@x.y.z
+      workflows:
+        packtracker:
+          jobs:
+            - packtracker/report:
+                project_root: "./packages/internal_package"
