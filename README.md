@@ -34,6 +34,18 @@ create a new workflow.
 By default, this base configuration should _just work_ most of the time.  If you have a non-standard
 setup, you can tweak the job with the following 2 optional parameters.
 
+```yml
+version: 2.1
+
+orbs:
+  packtracker: packtracker/report@dev:2.2.0
+
+workflows:
+  packtracker:
+    jobs:
+      - packtracker/report
+```
+
 ##### `webpack_config`
 
 We try and assume your webpack configuration is located in the root of your repository as `webpack.config.js`

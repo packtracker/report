@@ -6,11 +6,17 @@ const PacktrackerPlugin = require('@packtracker/webpack-plugin')
 let config = {}
 if (fs.existsSync(process.env.WEBPACK_CONFIG_PATH)) {
   console.log(`packtracker: webpack config file loaded (${process.env.WEBPACK_CONFIG_PATH})`)
-  config = require(process.env.WEBPACK_CONFIG_PATH)
+  customConfig = require(process.env.WEBPACK_CONFIG_PATH)
+
+  // Check for CRA config factory
+  if (isFunction(customConfig)) {
+    config = customConfig('production')
+  } else {
+    config = customConfig
+  }
 } else {
   console.log(`packtracker: webpack config file not found`)
 }
-
 
 config.plugins = config.plugins || []
 
@@ -53,4 +59,8 @@ function circleConfig () {
     branch: process.env.CIRCLE_BRANCH,
     commit: process.env.CIRCLE_SHA1,
   }
+}
+
+function isFunction(value) {
+ return value && {}.toString.call(value) === '[object Function]'
 }

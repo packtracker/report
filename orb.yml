@@ -4,7 +4,7 @@ description: An orb for the packtracker.io webpack bundle analyzer service.
 executors:
   reporter:
     docker:
-      - image: packtracker/report:2.1.2
+      - image: packtracker/report:2.2.0
 jobs:
   report:
     description: |
@@ -30,9 +30,7 @@ jobs:
       - checkout
       - run:
           name: "Reporting to packtracker.io"
-          command: |
-            cp /entrypoint.sh .
-            ./entrypoint.sh
+          command: /entrypoint.sh
 examples:
   simple:
     description: Simplest use case, leveraging default webpack config location and root project path.
