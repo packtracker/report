@@ -30,9 +30,7 @@ jobs:
       - checkout
       - run:
           name: "Reporting to packtracker.io"
-          command: |
-            cp /entrypoint.sh .
-            ./entrypoint.sh
+          command: /entrypoint.sh
 examples:
   simple:
     description: Simplest use case, leveraging default webpack config location and root project path.

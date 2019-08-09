@@ -19,26 +19,26 @@ if [ -e yarn.lock ]; then
     exit 1
   fi
 
-  yarn add @packtracker/webpack-plugin@2.2.0-beta.2
-
   if [ "$CRA_VERSION" != "null" ]; then
     echo "Detected Create React App ($CRA_VERSION)"
     yes | yarn eject
     export WEBPACK_CONFIG_PATH='./config/webpack.config.js'
   fi
+
+  yarn add @packtracker/webpack-plugin@2.2.0-beta.2
 elif [ -e package.json ]; then
   if ! npm install; then
     echo "npm install failed" 1>&2
     exit 1
   fi
 
-  npm install @packtracker/webpack-plugin@2.2.0-beta.2
-
   if [ "$CRA_VERSION" != "null" ]; then
     echo "Detected Create React App ($CRA_VERSION)"
     yes | npm run eject
     export WEBPACK_CONFIG_PATH='./config/webpack.config.js'
   fi
+
+  npm install @packtracker/webpack-plugin@2.2.0-beta.2
 else
   echo "Could not find package.json within $(pwd)" 1>&2
   echo 'Try setting a custom root directory with the $PT_PROJECT_ROOT environment variable to set a custom root path.' 1>&2
