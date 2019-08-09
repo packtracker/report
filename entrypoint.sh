@@ -25,7 +25,7 @@ if [ -e yarn.lock ]; then
     export WEBPACK_CONFIG_PATH='./config/webpack.config.js'
   fi
 
-  yarn add @packtracker/webpack-plugin@2.2.0-beta.2
+  yarn add @packtracker/webpack-plugin@2.2.0
 elif [ -e package.json ]; then
   if ! npm install; then
     echo "npm install failed" 1>&2
@@ -38,7 +38,7 @@ elif [ -e package.json ]; then
     export WEBPACK_CONFIG_PATH='./config/webpack.config.js'
   fi
 
-  npm install @packtracker/webpack-plugin@2.2.0-beta.2
+  npm install @packtracker/webpack-plugin@2.2.0
 else
   echo "Could not find package.json within $(pwd)" 1>&2
   echo 'Try setting a custom root directory with the $PT_PROJECT_ROOT environment variable to set a custom root path.' 1>&2
