@@ -19,7 +19,7 @@ if [ -e yarn.lock ]; then
     exit 1
   fi
 
-  yarn add @packtracker/webpack-plugin@2.2.0-beta.1
+  yarn add @packtracker/webpack-plugin@2.2.0-beta.2
 
   if [ "$CRA_VERSION" != "null" ]; then
     echo "Detected Create React App ($CRA_VERSION)"
@@ -32,7 +32,7 @@ elif [ -e package.json ]; then
     exit 1
   fi
 
-  npm install @packtracker/webpack-plugin@2.2.0-beta.1
+  npm install @packtracker/webpack-plugin@2.2.0-beta.2
 
   if [ "$CRA_VERSION" != "null" ]; then
     echo "Detected Create React App ($CRA_VERSION)"
