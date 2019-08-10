@@ -38,7 +38,7 @@ setup, you can tweak the job with the following 2 optional parameters.
 version: 2.1
 
 orbs:
-  packtracker: packtracker/report@dev:2.2.0
+  packtracker: packtracker/report@2.2.2
 
 workflows:
   packtracker:
@@ -98,7 +98,7 @@ workflow "packtracker.io" {
 }
 
 action "Report to packtracker.io" {
-  uses = "packtracker/report@2.1.0"
+  uses = "packtracker/report@2.2.2"
   secrets = ["PT_PROJECT_TOKEN"]
   env = {
     "WEBPACK_CONFIG_PATH" = "./config/webpack/production.js"
