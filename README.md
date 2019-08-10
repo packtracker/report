@@ -89,20 +89,19 @@ workflows:
 
 #### Workflow
 
-A sample workflow file might look something like this
+A sample `.github/workflows/push.yml` file might look something like this
 
-```
-workflow "packtracker.io" {
-  on = "push"
-  resolves = ["Report to packtracker.io"]
-}
-
-action "Report to packtracker.io" {
-  uses = "packtracker/report@2.2.2"
-  secrets = ["PT_PROJECT_TOKEN"]
-  env = {
-    "WEBPACK_CONFIG_PATH" = "./config/webpack/production.js"
-    "PT_PROJECT_ROOT" = "./path/to/subdirectory"
-  }
-}
+```yml
+on: push
+name: packtracker.io
+jobs:
+  report:
+    name: report webpack stats
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: report webpack stats
+      uses: packtracker/report@2.2.2
+      env:
+        PT_PROJECT_TOKEN: ${{ secrets.PT_PROJECT_TOKEN }}
 ```
