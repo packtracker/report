@@ -1,5 +1,7 @@
 version: 2.1
-description: An orb for the packtracker.io webpack bundle analyzer service.
+description: >
+  An orb for the packtracker.io webpack bundle analyzer service.
+  Repo: https://github.com/packtracker/report/
 
 executors:
   reporter:
