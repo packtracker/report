@@ -21,7 +21,7 @@ if [ -e yarn.lock ]; then
 
   if [ "$CRA_VERSION" != "null" ]; then
     echo "Detected Create React App ($CRA_VERSION)"
-    yes | yarn eject
+    echo yes | yarn eject
     export WEBPACK_CONFIG_PATH='./config/webpack.config.js'
   fi
 
@@ -34,7 +34,7 @@ elif [ -e package.json ]; then
 
   if [ "$CRA_VERSION" != "null" ]; then
     echo "Detected Create React App ($CRA_VERSION)"
-    yes | npm run eject
+    echo yes | npm run eject
     export WEBPACK_CONFIG_PATH='./config/webpack.config.js'
   fi
 
