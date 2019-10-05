@@ -5,8 +5,8 @@ const PacktrackerPlugin = require('@packtracker/webpack-plugin')
 
 let config = {}
 if (fs.existsSync(process.env.WEBPACK_CONFIG_PATH)) {
-  console.log(`packtracker: webpack config file loaded (${process.env.WEBPACK_CONFIG_PATH})`)
   customConfig = require(process.env.WEBPACK_CONFIG_PATH)
+  console.log(`packtracker: webpack config file loaded (${process.env.WEBPACK_CONFIG_PATH})`)
 
   // Check for CRA config factory
   if (isFunction(customConfig)) {
