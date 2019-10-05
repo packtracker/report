@@ -7,11 +7,13 @@ Strategies to report your build stats via the following platforms
 
 ### CircleCI Orb
 
-> **Note:** If you started using CircleCI prior to 2.1, you must enable pipelines within your project configuration to be able to use the orbs configuration.
+> In order to use the CircleCI Orb, you must first opt-in your organization to allow third party orbs within your Organization Security settings.
+>
+> You can do this by going to *Settings* > *Organization* > *Security*
 
 #### Setup
 
-The first step in adding our orb to your configuration is to declare it in your CircleCI configuration file.
+Next, you will add our orb to your configuration by declaring it in your CircleCI configuration.
 
 ```yaml
 version: 2.1
@@ -20,6 +22,8 @@ orbs:
   packtracker: packtracker/report@x.y.z
 ```
 
+> **Note:** If you started using CircleCI prior to 2.1, you must enable pipelines within your project configuration to be able to use the orbs configuration.
+
 #### Authentication
 
 In order for us to know what project you are reporting stats for, you must send along your packtracker project token.  To do this with the CircleCI Orb, you must create a new project environment variable in your CircleCI settings called `PT_PROJECT_TOKEN`.  You can find your packtracker project token in your project's settings.
@@ -27,24 +31,35 @@ In order for us to know what project you are reporting stats for, you must send 
 
 #### Configuration
 
-Now that you've declared our orb for use and added your project token, you have access to our
-`report` **job**.  You can put this job anywhere inside your existing CircleCI workflows, or
-create a new workflow.
+> If you are not yet using [CircleCI Workflows](https://circleci.com/docs/2.0/workflows/), you will need to do so.  If this is the case, you likely have a single build job in your CircleCI configuration.  In order to add the packtracker job to your CI run, you will need to set up a [multi-job workflow as seen in this example configuration](https://circleci.com/docs/2.0/workflows/#workflows-configuration-examples).
 
-By default, this base configuration should _just work_ most of the time.  If you have a non-standard
-setup, you can tweak the job with the following 2 optional parameters.
+Now that you've declared our orb for use and added your project token, you have access to our
+`report` **job**.  You can put this job anywhere inside your existing CircleCI workflows.
 
 ```yml
-version: 2.1
-
-orbs:
-  packtracker: packtracker/report@2.2.2
-
 workflows:
+  version: 2
+  your_existing_workflow:
+    jobs:
+      - build
+      - packtracker/report
+```
+
+Or, create a new workflow to run packtracker reporting in parallel.
+
+```yml
+workflows:
+  version: 2
+  your_existing_workflow:
+    jobs:
+      - build
   packtracker:
     jobs:
       - packtracker/report
 ```
+
+By default, this base configuration should _just work_ most of the time.  If you have a non-standard
+setup, you can tweak the job with the following 2 optional parameters.
 
 ##### `webpack_config`
 
