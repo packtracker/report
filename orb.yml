@@ -21,7 +21,7 @@ jobs:
       webpack_config:
         description: The path to your webpack configuration file (if present)
         type: string
-        default: "webpack.config.js"
+        default: "./webpack.config.js"
     environment:
       PT_PROJECT_ROOT: << parameters.project_root >>
       WEBPACK_CONFIG_PATH: << parameters.webpack_config >>
