@@ -14,7 +14,7 @@ export NODE_ENV="production"
 CRA_VERSION=$(jq '.dependencies | .["react-scripts"]' package.json)
 
 if [ -e yarn.lock ]; then
-  if ! yarn install; then
+  if ! yarn install --production=false; then
     echo "yarn install failed" 1>&2
     exit 1
   fi
@@ -27,7 +27,7 @@ if [ -e yarn.lock ]; then
 
   yarn add @packtracker/webpack-plugin@2.2.0
 elif [ -e package.json ]; then
-  if ! npm install; then
+  if ! npm install --production=false; then
     echo "npm install failed" 1>&2
     exit 1
   fi
