@@ -23,6 +23,7 @@ else
   exit 2
 fi
 
+$packager install
 $packager $install @packtracker/webpack-plugin@2.2.0
 
 if [ "$CRA_VERSION" != "null" ]; then
