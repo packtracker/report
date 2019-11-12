@@ -12,6 +12,7 @@ fi
 CRA_VERSION=$(jq '.dependencies | .["react-scripts"]' package.json)
 
 if [ -e yarn.lock ]; then
+  yarn config set ignore-engines true
   packager="yarn"
   install="add"
 elif [ -e package.json ]; then
