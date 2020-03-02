@@ -1,6 +1,18 @@
-#!/bin/sh
+#!/bin/bash
 
-set -eu
+set -e
+
+if [[ $# -eq 0 ]]; then
+cat <<-HELP
+  ./publish.sh <version> <environment>
+
+  Publishes docker image and CircleCI Orb
+
+  <version> - SemVer identifier of the release
+  <environment> - "development" (default) or "production"
+HELP
+exit
+fi
 
 [[ -z "$1" ]] && { echo "No version specified" ; exit 1; }
 version="$1"
@@ -19,12 +31,12 @@ cat <<-VERSIONING
     - README.md
 
 VERSIONING
+fi
 
-  read -p "Ready to publish? " -n 1 -r
-  echo    # (optional) move to a new line
-  if ! [[ $REPLY =~ ^[Yy]$ ]]; then
-    exit 1
-  fi
+read -p "Ready to publish to $environment? " -n 1 -r
+echo    # (optional) move to a new line
+if ! [[ $REPLY =~ ^[Yy]$ ]]; then
+  exit 1
 fi
 
 if [ "$environment" == "production" ]; then
