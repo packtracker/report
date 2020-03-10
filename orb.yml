@@ -1,7 +1,8 @@
 version: 2.1
-description: >
-  An orb for the packtracker.io webpack bundle analyzer service.
-  Repo: https://github.com/packtracker/report/
+description: Send webpack bundle stats to packtracker for analysis.
+display:
+  source_url: https://github.com/packtracker/report
+  home_url: https://packtracker.io/
 
 executors:
   reporter:
