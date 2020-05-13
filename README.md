@@ -105,7 +105,7 @@ workflows:
   packtracker:
     jobs:
       - packtracker/report:
-          selected_resource_class: "medium+"
+          selected_resource_class: medium+
 ```
 
 ### GitHub Action
