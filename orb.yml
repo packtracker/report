@@ -9,6 +9,12 @@ executors:
     resource_class: << parameters.selected_resource_class >>
     docker:
       - image: packtracker/report:2.2.9.2-dev
+    parameters:
+      selected_resource_class:
+        description: Resource class to be used for the executor
+        type: enum
+        default: medium
+        enum: [small, medium, medium+, large, xlarge, 2xlarge, 2xlarge+]
 
 jobs:
   report:
@@ -35,7 +41,9 @@ jobs:
     environment:
       PT_PROJECT_ROOT: << parameters.project_root >>
       WEBPACK_CONFIG_PATH: << parameters.webpack_config >>
-    executor: reporter
+    executor:
+      name: reporter
+      selected_resource_class: << parameters.selected_resource_class >>
     steps:
       - checkout
       - run:
@@ -85,4 +93,4 @@ examples:
         packtracker:
           jobs:
             - packtracker/report:
-                resource_class: "medium+"
+                resource_class: medium+
