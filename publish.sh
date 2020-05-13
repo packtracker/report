@@ -31,6 +31,15 @@ cat <<-VERSIONING
     - README.md
 
 VERSIONING
+else
+cat <<-VERSIONING
+  It looks like you're trying to publish to a development tag!
+
+  Make sure you've set your orb.yml file to point at the dev docker tag
+
+      - image: packtracker/report:X.X.X-dev
+
+VERSIONING
 fi
 
 read -p "Ready to publish to $environment? " -n 1 -r
