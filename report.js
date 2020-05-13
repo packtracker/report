@@ -10,7 +10,7 @@ if (fs.existsSync(process.env.WEBPACK_CONFIG_PATH)) {
 
   // Check for CRA config factory
   if (isFunction(customConfig)) {
-    config = customConfig('production')
+    config = customConfig('production', { mode: 'production' })
   } else {
     config = customConfig
   }
