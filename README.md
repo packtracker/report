@@ -19,7 +19,7 @@ Next, you will add our orb to your configuration by declaring it in your CircleC
 version: 2.1
 
 orbs:
-  packtracker: packtracker/report@2.2.8
+  packtracker: packtracker/report@2.2.9
 ```
 
 > **Note:** If you started using CircleCI prior to 2.1, you must enable pipelines within your project configuration to be able to use the orbs configuration.
@@ -116,7 +116,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: report webpack stats
-      uses: packtracker/report@2.2.8
+      uses: packtracker/report@2.2.9
       env:
         PT_PROJECT_TOKEN: ${{ secrets.PT_PROJECT_TOKEN }}
 ```
