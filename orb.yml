@@ -8,6 +8,8 @@ executors:
   reporter:
     docker:
       - image: packtracker/report:2.2.9
+    resource_class: << parameters.resource_class >>
+
 jobs:
   report:
     description: |
@@ -17,6 +19,10 @@ jobs:
       add the `PT_PROJECT_TOKEN` environment variable to your CircleCI project configuration.
       The project token can be found in the packtracker project settings.
     parameters:
+      resource_class:
+        description: Resource class to use for the executor
+        type: string
+        default: "medium"
       project_root:
         description: The path to the directory containing your package.json
         type: string
@@ -34,6 +40,7 @@ jobs:
       - run:
           name: "Reporting to packtracker.io"
           command: /entrypoint.sh
+
 examples:
   simple:
     description: Simplest use case, leveraging default webpack config location and root project path.
@@ -56,7 +63,6 @@ examples:
           jobs:
             - packtracker/report:
                 webpack_config: "./config/webpack/production.js"
-
   custom_nested_config_path:
     description: Custom project path, useful for monorepo situations.
     usage:
