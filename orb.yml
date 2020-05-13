@@ -7,7 +7,7 @@ display:
 executors:
   reporter:
     docker:
-      - image: packtracker/report:2.2.8
+      - image: packtracker/report:2.2.9
 jobs:
   report:
     description: |
