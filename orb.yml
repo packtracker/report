@@ -8,7 +8,7 @@ executors:
   reporter:
     resource_class: << parameters.selected_resource_class >>
     docker:
-      - image: packtracker/report:2.2.9.2-dev
+      - image: packtracker/report:2.2.9
     parameters:
       selected_resource_class:
         description: Resource class to be used for the executor
