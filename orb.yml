@@ -6,9 +6,9 @@ display:
 
 executors:
   reporter:
+    resource_class: << parameters.resource_class >>
     docker:
       - image: packtracker/report:2.2.9
-    resource_class: << parameters.resource_class >>
 
 jobs:
   report:
@@ -74,3 +74,14 @@ examples:
           jobs:
             - packtracker/report:
                 project_root: "./packages/internal_package"
+  custom_resource_class:
+    description: Custom resource class if your build is running out of memory.
+    usage:
+      version: 2.1
+      orbs:
+        packtracker: packtracker/report@x.y.z
+      workflows:
+        packtracker:
+          jobs:
+            - packtracker/report:
+                resource_class: "medium+"
