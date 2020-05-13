@@ -91,25 +91,22 @@ workflows:
           project_root: "./packages/internal_package"
 ```
 
-##### `resource_class`
+##### `selected_resource_class`
 
 Sometimes your Orb might not have enough resources to complete your webpack build, and you might
 need to specify a higher resource class.
 
 This is most often surfaced with a nondescript "Killed" message in your build output
 
-> **Note:** Resource classes are a paid feature of CircleCI
+> **Note:** [Resource classes are a paid feature of CircleCI](https://circleci.com/docs/2.0/configuration-reference/#resource_class)
 
 ```yaml
 workflows:
   packtracker:
     jobs:
       - packtracker/report:
-          resource_class: "medium+"
+          selected_resource_class: "medium+"
 ```
-
-For example, this is where the Ruby on Rails webpack configuration is located.
-
 
 ### GitHub Action
 

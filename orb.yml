@@ -6,9 +6,9 @@ display:
 
 executors:
   reporter:
-    resource_class: << parameters.resource_class >>
+    resource_class: << parameters.selected_resource_class >>
     docker:
-      - image: packtracker/report:2.2.9
+      - image: packtracker/report:2.2.9.2-dev
 
 jobs:
   report:
@@ -19,10 +19,11 @@ jobs:
       add the `PT_PROJECT_TOKEN` environment variable to your CircleCI project configuration.
       The project token can be found in the packtracker project settings.
     parameters:
-      resource_class:
-        description: Resource class to use for the executor
-        type: string
-        default: "medium"
+      selected_resource_class:
+        description: Resource class to be used for the executor
+        type: enum
+        default: medium
+        enum: [small, medium, medium+, large, xlarge, 2xlarge, 2xlarge+]
       project_root:
         description: The path to the directory containing your package.json
         type: string
