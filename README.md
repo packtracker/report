@@ -19,7 +19,7 @@ Next, you will add our orb to your configuration by declaring it in your CircleC
 version: 2.1
 
 orbs:
-  packtracker: packtracker/report@2.2.8
+  packtracker: packtracker/report@2.2.9
 ```
 
 > **Note:** If you started using CircleCI prior to 2.1, you must enable pipelines within your project configuration to be able to use the orbs configuration.
@@ -59,7 +59,7 @@ workflows:
 ```
 
 By default, this base configuration should _just work_ most of the time.  If you have a non-standard
-setup, you can tweak the job with the following 2 optional parameters.
+setup, you can tweak the job with the following 3 optional parameters.
 
 ##### `webpack_config`
 
@@ -91,6 +91,23 @@ workflows:
           project_root: "./packages/internal_package"
 ```
 
+##### `selected_resource_class`
+
+Sometimes your Orb might not have enough resources to complete your webpack build, and you might
+need to specify a higher resource class.
+
+This is most often surfaced with a nondescript "Killed" message in your build output
+
+> **Note:** [Resource classes are a paid feature of CircleCI](https://circleci.com/docs/2.0/configuration-reference/#resource_class)
+
+```yaml
+workflows:
+  packtracker:
+    jobs:
+      - packtracker/report:
+          selected_resource_class: medium+
+```
+
 ### GitHub Action
 
 #### Secrets (Required)
@@ -116,7 +133,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: report webpack stats
-      uses: packtracker/report@2.2.8
+      uses: packtracker/report@2.2.9
       env:
         PT_PROJECT_TOKEN: ${{ secrets.PT_PROJECT_TOKEN }}
 ```

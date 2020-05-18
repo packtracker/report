@@ -1,10 +1,21 @@
 version: 2.1
-description: An orb for the packtracker.io webpack bundle analyzer service.
+description: Send webpack bundle stats to packtracker for analysis.
+display:
+  source_url: https://github.com/packtracker/report
+  home_url: https://packtracker.io/
 
 executors:
   reporter:
+    resource_class: << parameters.selected_resource_class >>
     docker:
-      - image: packtracker/report:2.2.8
+      - image: packtracker/report:2.2.9
+    parameters:
+      selected_resource_class:
+        description: Resource class to be used for the executor
+        type: enum
+        default: medium
+        enum: [small, medium, medium+, large, xlarge, 2xlarge, 2xlarge+]
+
 jobs:
   report:
     description: |
@@ -14,6 +25,11 @@ jobs:
       add the `PT_PROJECT_TOKEN` environment variable to your CircleCI project configuration.
       The project token can be found in the packtracker project settings.
     parameters:
+      selected_resource_class:
+        description: Resource class to be used for the executor
+        type: enum
+        default: medium
+        enum: [small, medium, medium+, large, xlarge, 2xlarge, 2xlarge+]
       project_root:
         description: The path to the directory containing your package.json
         type: string
@@ -25,12 +41,15 @@ jobs:
     environment:
       PT_PROJECT_ROOT: << parameters.project_root >>
       WEBPACK_CONFIG_PATH: << parameters.webpack_config >>
-    executor: reporter
+    executor:
+      name: reporter
+      selected_resource_class: << parameters.selected_resource_class >>
     steps:
       - checkout
       - run:
           name: "Reporting to packtracker.io"
           command: /entrypoint.sh
+
 examples:
   simple:
     description: Simplest use case, leveraging default webpack config location and root project path.
@@ -53,7 +72,6 @@ examples:
           jobs:
             - packtracker/report:
                 webpack_config: "./config/webpack/production.js"
-
   custom_nested_config_path:
     description: Custom project path, useful for monorepo situations.
     usage:
@@ -65,3 +83,14 @@ examples:
           jobs:
             - packtracker/report:
                 project_root: "./packages/internal_package"
+  custom_resource_class:
+    description: Custom resource class if your build is running out of memory.
+    usage:
+      version: 2.1
+      orbs:
+        packtracker: packtracker/report@x.y.z
+      workflows:
+        packtracker:
+          jobs:
+            - packtracker/report:
+                resource_class: medium+
