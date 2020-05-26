@@ -4,6 +4,13 @@ set -eu
 
 : "${PT_PROJECT_TOKEN:?'You must set the PT_PROJECT_TOKEN secret'}"
 
+# yarn workspaces have yarn.lock in the root, and not in package dirs
+if [ -e yarn.lock ]; then
+  yarn config set ignore-engines true
+  packager="yarn"
+  install="add"
+fi
+
 if [ -n "${PT_PROJECT_ROOT:-}" ]; then
   echo "Custom root directory detected, navigating to: $PT_PROJECT_ROOT"
   cd $PT_PROJECT_ROOT
@@ -11,11 +18,11 @@ fi
 
 CRA_VERSION=$(jq '.dependencies | .["react-scripts"]' package.json)
 
-if [ -e yarn.lock ]; then
+if [ -e yarn.lock ] && [ -z "$packager" ]; then
   yarn config set ignore-engines true
   packager="yarn"
   install="add"
-elif [ -e package.json ]; then
+elif [ -e package.json ] && [ -z "$packager" ]; then
   packager="npm"
   install="install"
 else
