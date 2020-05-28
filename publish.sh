@@ -37,7 +37,11 @@ cat <<-VERSIONING
 
   Make sure you've set your orb.yml file to point at the dev docker tag
 
-      - image: packtracker/report:X.X.X-dev
+      - image: packtracker/report:$version-dev
+
+  Make sure you've also set the GitHub Action base image in `Dockerfile`
+
+      FROM packtracker/report:$version-dev
 
 VERSIONING
 fi
