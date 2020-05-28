@@ -100,7 +100,7 @@ examples:
             - packtracker/report:
                 selected_resource_class: medium+
   exclude_some_assets_from_reporting:
-    description: Custom resource class if your build is running out of memory.
+    description: Excluding specific assets with `main` or `pack` in their name.
     usage:
       version: 2.1
       orbs:

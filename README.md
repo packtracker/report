@@ -108,6 +108,22 @@ workflows:
           selected_resource_class: medium+
 ```
 
+##### `exclude_assets`
+
+There may be assets you wish to exclude from tracking.  This options allows you to pass a [regular expression string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).  When this regular expression matches the name of any asset you are producing, it will exclude it from reporting.  This simply gets passed along to the [webpack stats configuration](https://webpack.js.org/configuration/stats/#statsexcludeassets).
+
+For example:
+
+```yaml
+workflows:
+  packtracker:
+    jobs:
+      - packtracker/report:
+          exclude_assets: "main|pack"
+```
+
+This would exclude any assets with the string `main` or `pack` in the name.
+
 ### GitHub Action
 
 #### Secrets (Required)
