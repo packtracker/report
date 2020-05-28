@@ -19,7 +19,7 @@ Next, you will add our orb to your configuration by declaring it in your CircleC
 version: 2.1
 
 orbs:
-  packtracker: packtracker/report@2.2.9
+  packtracker: packtracker/report@2.3.0
 ```
 
 > **Note:** If you started using CircleCI prior to 2.1, you must enable pipelines within your project configuration to be able to use the orbs configuration.
