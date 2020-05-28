@@ -36,7 +36,7 @@ if [ "$CRA_VERSION" != "null" ]; then
   export WEBPACK_CONFIG_PATH='./config/webpack.config.js'
 fi
 
-$packager $install @packtracker/webpack-plugin@2.3.0-beta.1
+$packager $install @packtracker/webpack-plugin@2.3.0
 
 export NODE_ENV="production"
 
