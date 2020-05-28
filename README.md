@@ -134,6 +134,7 @@ This would exclude any assets with the string `main` or `pack` in the name.
 
   - `WEBPACK_CONFIG_PATH` - the relative path to your webpack configuration (if you have one)
   - `PT_PROJECT_ROOT` - the relative path to the directory of your project (containing your package.json file)
+  - `PT_EXCLUDE_ASSETS` - This options allows you to set a [regular expression string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).  When this regular expression matches the name of any asset you are producing, it will exclude it from reporting.  This simply gets passed along to the [webpack stats configuration](https://webpack.js.org/configuration/stats/#statsexcludeassets).
 
 #### Workflow
 
