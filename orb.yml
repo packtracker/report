@@ -8,7 +8,7 @@ executors:
   reporter:
     resource_class: << parameters.selected_resource_class >>
     docker:
-      - image: packtracker/report:2.2.9
+      - image: packtracker/report:2.3.0
     parameters:
       selected_resource_class:
         description: Resource class to be used for the executor
@@ -38,7 +38,12 @@ jobs:
         description: The path to your webpack configuration file (if present)
         type: string
         default: "./webpack.config.js"
+      exclude_assets:
+        description: Compiled as RegExp and passed as the [excludeAssets configuration in the webpack stats config](https://webpack.js.org/configuration/stats/#stats) (only available to webpack version 3.5.0+)
+        type: string
+        default: ""
     environment:
+      PT_EXCLUDE_ASSETS: << parameters.exclude_assets >>
       PT_PROJECT_ROOT: << parameters.project_root >>
       WEBPACK_CONFIG_PATH: << parameters.webpack_config >>
     executor:
@@ -93,4 +98,15 @@ examples:
         packtracker:
           jobs:
             - packtracker/report:
-                resource_class: medium+
+                selected_resource_class: medium+
+  exclude_some_assets_from_reporting:
+    description: Custom resource class if your build is running out of memory.
+    usage:
+      version: 2.1
+      orbs:
+        packtracker: packtracker/report@x.y.z
+      workflows:
+        packtracker:
+          jobs:
+            - packtracker/report:
+                exclude_assets: "main|pack"
